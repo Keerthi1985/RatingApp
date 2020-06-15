@@ -24,7 +24,7 @@ public class HelloController {
 	@GetMapping("/Hello")
 	public String hello(@RequestHeader HttpHeaders headers) {		
 		
-		System.out.println("Rating Demo");
+		System.out.println("Rating Hello Demo");
 		List<String>dummyKey= headers.get("user-agent"); 
 		if(dummyKey !=null) {
 		dummyKey.forEach(System.out::println);	}
@@ -36,9 +36,8 @@ public class HelloController {
 		List<String>dummyKey2= headers.get("accept-encoding"); 
 		if(dummyKey2 !=null) {
 		dummyKey2.forEach(System.out::println);	}*/
-		
-		HttpClient client = new DefaultHttpClient();
-		HttpGet get=null;
+
+		/*HttpGet get=null;
 		Random objGenerator = new Random();
         for (int iCount = 0; iCount< 10; iCount++){
 		  int num = objGenerator.nextInt(100);
@@ -47,16 +46,9 @@ public class HelloController {
 		  }else {
 			  get = new HttpGet("http://dataservice4.default.svc.cluster.local:8084/Sample4Hello");
 		  }
-         }
-	    
-		try {
-			client.execute(get);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+         }*/
 		
-		System.out.println("recieved request "+ Thread.currentThread().getId());
-		return "HelloRating";
+		System.out.println("Rating recieved request "+ Thread.currentThread().getId());
+		return "Hello Rating";
 	}
 }
