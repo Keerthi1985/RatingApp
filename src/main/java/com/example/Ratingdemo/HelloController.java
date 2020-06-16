@@ -8,6 +8,7 @@ import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.util.MultiValueMap;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -16,16 +17,23 @@ import org.apache.http.protocol.HttpContext;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @RestController
 
 public class HelloController {
 
 	@GetMapping("/Hello")
-	public String hello(@RequestHeader HttpHeaders headers) {		
-		
+	public String hello(@RequestHeader MultiValueMap<String, String> headers) {		
+	    
 		System.out.println("Rating Hello Demo");
-		List<String>dummyKey= headers.get("x-request-id"); 
+		
+	    headers.forEach((key, value) -> {
+	    	System.out.println(String.format(
+	          "Rating Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
+	    });
+		
+		/*List<String>dummyKey= headers.get("x-request-id"); 
 		if(dummyKey !=null) {
 			System.out.println("x-request-id");
 			dummyKey.forEach(System.out::println);	}
@@ -78,20 +86,9 @@ public class HelloController {
 		List<String>dummyKey10= headers.get("user-agent"); 
 		if(dummyKey10 !=null) {
 			System.out.println("user-agent");
-		dummyKey10.forEach(System.out::println);	}
-
-		/*HttpGet get=null;
-		Random objGenerator = new Random();
-        for (int iCount = 0; iCount< 10; iCount++){
-		  int num = objGenerator.nextInt(100);
-		  if(num % 2 == 0) {
-			  get = new HttpGet("http://dataservice3.default.svc.cluster.local:8083/Sample3Hello");
-		  }else {
-			  get = new HttpGet("http://dataservice4.default.svc.cluster.local:8084/Sample4Hello");
-		  }
-         }*/
+		dummyKey10.forEach(System.out::println);	}*/
 		
 		System.out.println("Rating recieved request "+ Thread.currentThread().getId());
-		return "Hello Rating";
-	}
+		return "Hello Rating Headers";
+	}	
 }
