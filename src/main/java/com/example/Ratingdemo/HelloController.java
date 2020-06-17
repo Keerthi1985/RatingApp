@@ -1,22 +1,10 @@
 package com.example.Ratingdemo;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.apache.catalina.manager.DummyProxySession;
-import org.apache.http.client.*;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.util.MultiValueMap;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.protocol.HttpContext;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @RestController
@@ -90,5 +78,21 @@ public class HelloController {
 		
 		System.out.println("Rating recieved request "+ Thread.currentThread().getId());
 		return "Hello Rating Headers";
-	}	
+	}
+	
+	@GetMapping("/HelloJager")
+	public String checkJaeger() {
+		
+		System.out.println("entered checkJaeger");
+		return "Hello Jaeger";
+		
+	}
+	
+	@GetMapping("/JagerChaining")
+	public String chaining() {
+		
+		System.out.println("entered chaining");
+		return "Hello Jaeger chaining";
+		
+	}
 }
