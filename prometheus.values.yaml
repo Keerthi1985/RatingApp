@@ -1178,7 +1178,7 @@ serverFiles:
           - targets:
              - localhost:9090      
       - job_name: rating
-      
+        metrics_path: /metrics/
         scheme: http
         
         kubernetes_sd_configs:
@@ -1186,48 +1186,47 @@ serverFiles:
             namespaces:
               names:
               - default
-          
-          
-          relabel_configs:
-          - source_labels: [__meta_kubernetes_service_label_app]
-            separator: ;
-            regex: rating:9300
-            replacement: $1
-            action: keep
-          - source_labels: [__meta_kubernetes_endpoint_port_name]
-            separator: ;
-            regex: http
-            replacement: $1
-            action: keep
-          - source_labels: [__meta_kubernetes_namespace]
-            separator: ;
-            regex: (.*)
-            target_label: namespace
-            replacement: $1
-            action: replace
-          - source_labels: [__meta_kubernetes_pod_name]
-            separator: ;
-            regex: (.*)
-            target_label: pod
-            replacement: $1
-            action: replace
-          - source_labels: [__meta_kubernetes_service_name]
-            separator: ;
-            regex: (.*)
-            target_label: service
-            replacement: $1
-            action: replace
-          - source_labels: [__meta_kubernetes_service_name]
-            separator: ;
-            regex: (.*)
-            target_label: job
-            replacement: ${1}
-            action: replace
-          - separator: ;
-            regex: (.*)
-            target_label: endpoint
-            replacement: http
-            action: replace
+              
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_label_app]
+          separator: ;
+          regex: rating
+          replacement: $1
+          action: keep
+        - source_labels: [__meta_kubernetes_endpoint_port_name]
+          separator: ;
+          regex: http
+          replacement: $1
+          action: keep
+        - source_labels: [__meta_kubernetes_namespace]
+          separator: ;
+          regex: (.*)
+          target_label: namespace
+          replacement: $1
+          action: replace
+        - source_labels: [__meta_kubernetes_pod_name]
+          separator: ;
+          regex: (.*)
+          target_label: pod
+          replacement: $1
+          action: replace
+        - source_labels: [__meta_kubernetes_service_name]
+          separator: ;
+          regex: (.*)
+          target_label: service
+          replacement: $1
+          action: replace
+        - source_labels: [__meta_kubernetes_service_name]
+          separator: ;
+          regex: (.*)
+          target_label: job
+          replacement: ${1}
+          action: replace
+        - separator: ;
+          regex: (.*)
+          target_label: endpoint
+          replacement: http
+          action: replace
           
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)
