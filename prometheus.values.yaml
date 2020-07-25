@@ -1203,7 +1203,7 @@ serverFiles:
 
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
-        scheme: https
+        scheme: http
 
         # This TLS & bearer token file config is used to connect to the actual scrape
         # endpoints for cluster components. This is separate to discovery auth
@@ -1234,7 +1234,7 @@ serverFiles:
 
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
-        scheme: https
+        scheme: http
 
         # This TLS & bearer token file config is used to connect to the actual scrape
         # endpoints for cluster components. This is separate to discovery auth
@@ -1271,7 +1271,7 @@ serverFiles:
 
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
-        scheme: https
+        scheme: http
 
         # This TLS & bearer token file config is used to connect to the actual scrape
         # endpoints for cluster components. This is separate to discovery auth
