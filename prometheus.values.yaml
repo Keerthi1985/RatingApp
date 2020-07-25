@@ -1179,12 +1179,14 @@ serverFiles:
              - localhost:9090      
       - job_name: rating
       
-          kubernetes_sd_configs:
+        scheme: http
+        
+        kubernetes_sd_configs:
           - role: endpoints
             namespaces:
               names:
               - default
-          scheme: http
+          
           
           relabel_configs:
           - source_labels: [__meta_kubernetes_service_label_app]
