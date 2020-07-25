@@ -1182,8 +1182,7 @@ serverFiles:
           - targets:
              - rating:9300
       - job_name: example-metric
-          scrape_interval: 5s
-
+          
           metrics_path: /metrics/
           scheme: http
           
