@@ -1179,6 +1179,9 @@ serverFiles:
              - localhost:9090      
       - job_name: rating
         metrics_path: /metrics/
+        static_configs:
+          - targets:
+             - rating:9300
         scheme: http
         
         kubernetes_sd_configs:
