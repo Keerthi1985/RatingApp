@@ -1176,12 +1176,8 @@ serverFiles:
       - job_name: prometheus
         static_configs:
           - targets:
-             - localhost:9090
+             - localhost:9090      
       - job_name: rating
-        static_configs:
-          - targets:
-             - rating:9300
-      - job_name: example-metric
       
           kubernetes_sd_configs:
           - role: endpoints
