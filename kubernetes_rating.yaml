@@ -41,6 +41,9 @@ spec:
   selector:
     app: rating
   ports:
+  - name: metrics
+    port: 8082
+    targetPort: 8082
   - name: http
     port: 9300
-    targetPort: 9300
+    targetPort: 9300  
