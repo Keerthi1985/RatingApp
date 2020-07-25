@@ -1182,16 +1182,14 @@ serverFiles:
           - targets:
              - rating:9300
       - job_name: example-metric
-          
-          metrics_path: /metrics/
-          scheme: http
-          
+      
           kubernetes_sd_configs:
           - role: endpoints
             namespaces:
               names:
               - default
-
+          scheme: http
+          
           relabel_configs:
           - source_labels: [__meta_kubernetes_service_label_app]
             separator: ;
