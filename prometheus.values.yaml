@@ -1264,7 +1264,7 @@ serverFiles:
 
         relabel_configs:
         - action: labelmap
-        regex: __meta_kubernetes_node_label_(.+)
+          regex: __meta_kubernetes_node_label_(.+)
 
         # Scrape config for Kubelet cAdvisor.
         #
@@ -1299,7 +1299,7 @@ serverFiles:
         # the cluster. Otherwise, more config options have to be provided within the
         # <kubernetes_sd_config>.
         tls_config:
-        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         # If your node certificates are self-signed or use a different CA to the
         # master CA, then disable certificate verification below. Note that
         # certificate verification is an integral part of a secure infrastructure
@@ -1314,7 +1314,7 @@ serverFiles:
 
         relabel_configs:
         - action: labelmap
-        regex: __meta_kubernetes_node_label_(.+)
+          regex: __meta_kubernetes_node_label_(.+)
 
         # Example scrape config for service endpoints.
         #
@@ -1354,13 +1354,13 @@ serverFiles:
         #    target_label: __scheme__
         #    regex: (https?)
         - action: labelmap
-        regex: __meta_kubernetes_service_label_(.+)
+          regex: __meta_kubernetes_service_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]
-        action: replace
-        target_label: kubernetes_namespace
+          action: replace
+          target_label: kubernetes_namespace
         - source_labels: [__meta_kubernetes_service_name]
-        action: replace
-        target_label: kubernetes_name
+          action: replace
+          target_label: kubernetes_name
 
         # Example scrape config for probing services via the Blackbox Exporter.
         #
@@ -1381,17 +1381,17 @@ serverFiles:
         #    action: keep
         #    regex: true
         - source_labels: [__address__]
-        target_label: __param_target
+          target_label: __param_target
         - target_label: __address__
-        replacement: blackbox-exporter.example.com:9115
+          replacement: blackbox-exporter.example.com:9115
         - source_labels: [__param_target]
-        target_label: instance
+          target_label: instance
         - action: labelmap
-        regex: __meta_kubernetes_service_label_(.+)
+          regex: __meta_kubernetes_service_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]
-        target_label: kubernetes_namespace
+          target_label: kubernetes_namespace
         - source_labels: [__meta_kubernetes_service_name]
-        target_label: kubernetes_name
+          target_label: kubernetes_name
 
         # Example scrape config for probing ingresses via the Blackbox Exporter.
         #
@@ -1412,19 +1412,19 @@ serverFiles:
         #    action: keep
         #    regex: true
         - source_labels: [__meta_kubernetes_ingress_scheme,__address__,__meta_kubernetes_ingress_path]
-        regex: (.+);(.+);(.+)
-        replacement: ${1}://${2}${3}
-        target_label: __param_target
+          regex: (.+);(.+);(.+)
+          replacement: ${1}://${2}${3}
+          target_label: __param_target
         - target_label: __address__
-        replacement: blackbox-exporter.example.com:9115
+          replacement: blackbox-exporter.example.com:9115
         - source_labels: [__param_target]
-        target_label: instance
+          target_label: instance
         - action: labelmap
-        regex: __meta_kubernetes_ingress_label_(.+)
+          regex: __meta_kubernetes_ingress_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]
-        target_label: kubernetes_namespace
+          target_label: kubernetes_namespace
         - source_labels: [__meta_kubernetes_ingress_name]
-        target_label: kubernetes_name
+          target_label: kubernetes_name
 
         # Example scrape config for pods
         #
@@ -1458,13 +1458,13 @@ serverFiles:
         #    replacement: $1:$2
         #    target_label: __address__
         - action: labelmap
-        regex: __meta_kubernetes_pod_label_(.+)
+          regex: __meta_kubernetes_pod_label_(.+)
         - source_labels: [__meta_kubernetes_namespace]
-        action: replace
-        target_label: kubernetes_namespace
+          action: replace
+          target_label: kubernetes_namespace
         - source_labels: [__meta_kubernetes_pod_name]
-        action: replace
-        target_label: kubernetes_pod_name
+          action: replace
+          target_label: kubernetes_pod_name
 
       # Example Scrape config for pods which should be scraped slower. An useful example
       # would be stackriver-exporter which querys an API on every scrape of the pod
