@@ -1172,59 +1172,15 @@ serverFiles:
       - /etc/config/rules
       - /etc/config/alerts
 
-    global:
-      scrape_interval:     15s
-
-      external_labels:
-        monitor: 'example-monitor'
-    scrape_configs:           
+    scrape_configs:
+      - job_name: prometheus
+        static_configs:
+          - targets:
+             - localhost:9090
       - job_name: rating
-        scrape_interval: 5s
-        metrics_path: /metrics/
-                
-        kubernetes_sd_configs:
-          - role: endpoints
-        scheme: http           
-        relabel_configs:
-        - source_labels: [__meta_kubernetes_service_label_app]
-          separator: ;
-          regex: rating
-          replacement: $1
-          action: keep
-        - source_labels: [__meta_kubernetes_endpoint_port_name]
-          separator: ;
-          regex: http
-          replacement: $1
-          action: keep
-        - source_labels: [__meta_kubernetes_namespace]
-          separator: ;
-          regex: (.*)
-          target_label: namespace
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_pod_name]
-          separator: ;
-          regex: (.*)
-          target_label: pod
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_service_name]
-          separator: ;
-          regex: (.*)
-          target_label: service
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_service_name]
-          separator: ;
-          regex: (.*)
-          target_label: job
-          replacement: ${1}
-          action: replace
-        - separator: ;
-          regex: (.*)
-          target_label: endpoint
-          replacement: http
-          action: replace
+        static_configs:
+          - targets:
+             - rating:9300
           
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)
@@ -1315,7 +1271,7 @@ serverFiles:
 
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
-        scheme: https
+        scheme: http
 
         # This TLS & bearer token file config is used to connect to the actual scrape
         # endpoints for cluster components. This is separate to discovery auth
@@ -1375,7 +1331,7 @@ serverFiles:
           - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
             action: replace
             target_label: __scheme__
-            regex: (https?)
+            regex: (http?)
           - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
             action: replace
             target_label: __metrics_path__
@@ -1424,7 +1380,7 @@ serverFiles:
           - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
             action: replace
             target_label: __scheme__
-            regex: (https?)
+            regex: (http?)
           - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
             action: replace
             target_label: __metrics_path__
