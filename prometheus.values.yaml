@@ -1185,7 +1185,7 @@ serverFiles:
         scrape_interval: 5s
         scrape_timeout: 5s
         metrics_path: /metrics
-        scheme: https
+        scheme: http
         kubernetes_sd_configs:
         - api_server: null
           role: endpoints
@@ -1205,7 +1205,7 @@ serverFiles:
         scrape_interval: 5s
         scrape_timeout: 5s
         metrics_path: /metrics
-        scheme: https
+        scheme: http
         kubernetes_sd_configs:
         - api_server: null        
           role: node
@@ -1235,7 +1235,7 @@ serverFiles:
         scrape_interval: 5s
         scrape_timeout: 5s
         metrics_path: /metrics
-        scheme: https
+        scheme: http
         kubernetes_sd_configs:
         - api_server: null
           role: pod
@@ -1283,7 +1283,7 @@ serverFiles:
         scrape_interval: 5s
         scrape_timeout: 5s
         metrics_path: /metrics
-        scheme: https
+        scheme: http
         kubernetes_sd_configs:
         - api_server: null
           role: node
@@ -1313,7 +1313,7 @@ serverFiles:
         scrape_interval: 5s
         scrape_timeout: 5s
         metrics_path: /metrics
-        scheme: https
+        scheme: http
         kubernetes_sd_configs:
         - api_server: null
           role: endpoints
@@ -1327,7 +1327,7 @@ serverFiles:
           action: keep
         - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
           separator: ;
-          regex: (https?)
+          regex: (http?)
           target_label: __scheme__
           replacement: $1
           action: replace
