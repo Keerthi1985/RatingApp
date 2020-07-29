@@ -1198,7 +1198,7 @@ serverFiles:
         relabel_configs:
         - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
           separator: ;
-          regex: default;kubernetes;https
+          regex: default;kubernetes;http
           replacement: $1
           action: keep
       - job_name: kubernetes-nodes      
